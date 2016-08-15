@@ -31,8 +31,8 @@ class IllnessRecogAdapter extends ArrayAdapter<Illness>{
         mIllnessDesc.setText(illness.illnessDesc);
         ImageButton mSelectedImg = (ImageButton)view.findViewById(R.id.green_tick);
         mSelectedImg.setClickable(true);
-        ImageButton mUnselectImg = (ImageButton)view.findViewById(R.id.red_cross);
-        mUnselectImg.setClickable(false);
+        final ImageButton mUnselectImg = (ImageButton)view.findViewById(R.id.red_cross);
+        mUnselectImg.setClickable(true);
         return view;
     }
 }

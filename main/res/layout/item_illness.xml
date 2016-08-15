@@ -19,14 +19,15 @@
             android:layout_height="75dp"
             android:src="@mipmap/green_tick"
             android:id="@+id/green_tick"
-            android:clickable="true"
-            android:background="#798dd8" />
+            android:background="?android:selectableItemBackground"
+            />
         <ImageButton
             android:layout_width="75dp"
             android:layout_height="75dp"
             android:src="@mipmap/red_cross"
             android:id="@+id/red_cross"
-            android:background="#798dd8" />
+            android:background="?android:selectableItemBackground"
+            />
     </LinearLayout>
     <ImageView
         android:id="@+id/illness_img"
