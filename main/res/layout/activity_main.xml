@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="sumantics.github.com.voice2text.MainActivity"
+    android:focusableInTouchMode="true"
+    android:backgroundTintMode="screen"
+    android:background="@mipmap/body_web_edited"
+    android:backgroundTint="@color/abc_background_cache_hint_selector_material_dark">
+    <RadioButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/heart"
+        android:layout_above="@+id/leftForearm"
+        android:layout_toRightOf="@+id/head"
+        android:layout_toEndOf="@+id/head" />
+
+    <RadioButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/leftForearm"
+        android:layout_above="@+id/rightHand"
+        android:layout_toLeftOf="@+id/head"
+        android:layout_toStartOf="@+id/head"
+        android:layout_marginRight="33dp"
+        android:layout_marginEnd="33dp"
+        android:layout_marginBottom="42dp" />
+
+    <RadioButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/rightHand"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@+id/heart"
+        android:layout_toEndOf="@+id/heart"
+        android:layout_marginLeft="37dp"
+        android:layout_marginStart="37dp" />
+
+    <RadioButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/ankle"
+        android:checked="false"
+        android:layout_marginBottom="27dp"
+        android:layout_alignParentBottom="true"
+        android:layout_toLeftOf="@+id/head"
+        android:layout_toStartOf="@+id/head" />
+
+    <RadioButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/knee"
+        android:checked="false"
+        android:layout_above="@+id/ankle"
+        android:layout_toLeftOf="@+id/rightHand"
+        android:layout_toStartOf="@+id/rightHand"
+        android:layout_marginBottom="49dp" />
+
+    <RadioButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/shoulder"
+        android:layout_alignBottom="@+id/heart"
+        android:layout_marginBottom="22dp"
+        android:layout_toLeftOf="@+id/rightHand"
+        android:layout_alignTop="@+id/leftForearm"
+        android:layout_alignLeft="@+id/rightHand"
+        android:layout_alignStart="@+id/rightHand" />
+
+    <RadioButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/head"
+        android:layout_above="@+id/heart"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="43dp" />
+</RelativeLayout>

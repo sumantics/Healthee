@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ListView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fragment_illness_recog"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:numColumns="auto_fit"
+    android:verticalSpacing="3dp"
+    android:horizontalSpacing="3dp"
+    android:gravity="center"
+    android:background="#aab3d8">
+</ListView>
