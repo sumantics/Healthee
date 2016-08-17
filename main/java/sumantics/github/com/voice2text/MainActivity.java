@@ -15,7 +15,6 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
-    TextToSpeech tts;
     RadioButton head;
     RadioButton heart;
     RadioButton arm;
@@ -24,7 +23,6 @@ public class MainActivity extends AppCompatActivity {
     RadioButton ankle;
 
     static final int SPEECH_TO_TEXT_RES = 101;
-
     void initDisplay(){
         head = (RadioButton)findViewById(R.id.head);
         head.setChecked(false);
@@ -32,7 +30,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 try {
-                    tts=null;
                     Intent intent = new Intent(getApplication().getApplicationContext(), IllnessRecogActivity.class);
                     intent.putExtra(IllnessRecogFragment.KEY, Util.Part.HEAD);
                     startActivity(intent);
@@ -49,7 +46,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 try {
-                    tts=null;
                     Intent intent = new Intent(getApplication().getApplicationContext(), IllnessRecogActivity.class);
                     intent.putExtra(IllnessRecogFragment.KEY, Util.Part.HEART);
                     startActivity(intent);
@@ -66,7 +62,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 try {
-                    tts=null;
                     Intent intent = new Intent(getApplication().getApplicationContext(), IllnessRecogActivity.class);
                     intent.putExtra(IllnessRecogFragment.KEY, Util.Part.ARM);
                     startActivity(intent);
@@ -83,7 +78,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 try {
-                    tts=null;
                     Intent intent = new Intent(getApplication().getApplicationContext(), IllnessRecogActivity.class);
                     intent.putExtra(IllnessRecogFragment.KEY, Util.Part.HAND);
                     startActivity(intent);
@@ -100,7 +94,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 try {
-                    tts=null;
                     Intent intent = new Intent(getApplication().getApplicationContext(), IllnessRecogActivity.class);
                     intent.putExtra(IllnessRecogFragment.KEY, Util.Part.KNEE);
                     startActivity(intent);
@@ -117,7 +110,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 try {
-                    tts=null;
                     Intent intent = new Intent(getApplication().getApplicationContext(), IllnessRecogActivity.class);
                     intent.putExtra(IllnessRecogFragment.KEY, Util.Part.ANKLE);
                     startActivity(intent);
@@ -126,11 +118,6 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "NOT supported", Toast.LENGTH_SHORT).show();
                 }
             }
-        });
-
-        tts = new TextToSpeech(this, new TextToSpeech.OnInitListener() {
-            @Override
-            public void onInit(int status) {}
         });
     }
 
@@ -157,8 +144,8 @@ public class MainActivity extends AppCompatActivity {
                     Log.d("onActivityResult","Number of results: "+extraRes.size());
                     for(String s:extraRes) {
                         Log.d("onActivityResult", s + " ");
-                        tts.setLanguage(Util.getLang());
-                        tts.speak(s, TextToSpeech.QUEUE_ADD, null);
+                        //tts.setLanguage(Util.getLang());
+                        //tts.speak(s, TextToSpeech.QUEUE_ADD, null);
                     }
                 }
                 break;

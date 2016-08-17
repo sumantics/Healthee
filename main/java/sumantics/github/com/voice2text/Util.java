@@ -46,7 +46,7 @@ public class Util{
     }
 
     static String analyze(Set<String> selectedIllnesses){
-        if(selectedIllnesses.contains("head_headache")&&selectedIllnesses.contains("head_cough")){
+        if(selectedIllnesses.contains("head_headache")&&selectedIllnesses.contains("head_toothache")){
             //return "Take an asprin now and meet the dentist tomorrow!";
             return "अब एक Asprin ले लो और कल दंत चिकित्सक से मिल ले!";
         }else if(selectedIllnesses.contains("head_headache")){
