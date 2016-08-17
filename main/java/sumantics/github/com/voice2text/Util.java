@@ -2,13 +2,15 @@ package sumantics.github.com.voice2text;
 
 import android.content.Intent;
 import android.speech.RecognizerIntent;
+import android.speech.tts.TextToSpeech;
 import android.util.Log;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
+import java.util.Set;
 
-public class Util {
+public class Util{
     static Intent getVoiceIntent(){
         Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
         intent.putExtra(RecognizerIntent.EXTRA_PROMPT, "बोले");
@@ -41,6 +43,18 @@ public class Util {
             return Arrays.asList(new Illness("पैर","क्या आपके पैर में मोच है?","ankle_broken"));
         else
             return Arrays.asList(new Illness("Headache","head ache","head_headache"));
+    }
+
+    static String analyze(Set<String> selectedIllnesses){
+        if(selectedIllnesses.contains("head_headache")&&selectedIllnesses.contains("head_cough")){
+            //return "Take an asprin now and meet the dentist tomorrow!";
+            return "अब एक Asprin ले लो और कल दंत चिकित्सक से मिल ले!";
+        }else if(selectedIllnesses.contains("head_headache")){
+            return "अब एक Asprin ले लो!";
+        }
+        else{
+            return "Take care!";
+        }
     }
 }
 
