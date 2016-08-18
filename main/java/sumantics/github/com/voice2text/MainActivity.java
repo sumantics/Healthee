@@ -22,7 +22,6 @@ public class MainActivity extends AppCompatActivity {
     RadioButton knee;
     RadioButton ankle;
 
-    static final int SPEECH_TO_TEXT_RES = 101;
     void initDisplay(){
         head = (RadioButton)findViewById(R.id.head);
         head.setChecked(false);
@@ -132,24 +131,5 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         initDisplay();
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        switch (requestCode) {
-            case SPEECH_TO_TEXT_RES: {
-                if (resultCode == RESULT_OK && null != data) {
-                    ArrayList<String> extraRes = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
-                    Log.d("onActivityResult","Number of results: "+extraRes.size());
-                    for(String s:extraRes) {
-                        Log.d("onActivityResult", s + " ");
-                        //tts.setLanguage(Util.getLang());
-                        //tts.speak(s, TextToSpeech.QUEUE_ADD, null);
-                    }
-                }
-                break;
-            }
-        }
     }
 }

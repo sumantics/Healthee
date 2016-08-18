@@ -5,5 +5,15 @@
     android:id="@+id/illness_recog_container"
     tools:context="sumantics.github.com.voice2text.IllnessRecogActivity"
     >
-
+    <Button
+        android:id="@+id/analysis_enable"
+        android:layout_gravity="bottom"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:onClick="gotoAnalysisActivity"
+        />
 </FrameLayout>

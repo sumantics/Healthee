@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">Voice2Text</string>
+    <string name="app_name">Healthee</string>
+    <string name="action_settings">Settings</string>
 </resources>
