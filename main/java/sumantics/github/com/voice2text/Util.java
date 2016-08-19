@@ -1,8 +1,10 @@
 package sumantics.github.com.voice2text;
 
 import android.content.Intent;
+import android.net.ConnectivityManager;
 import android.speech.RecognizerIntent;
 import android.speech.tts.TextToSpeech;
+import android.telephony.SmsManager;
 import android.util.Log;
 
 import java.util.Arrays;
@@ -30,6 +32,26 @@ public class Util{
         intent.putExtra(RecognizerIntent.EXTRA_ONLY_RETURN_LANGUAGE_PREFERENCE, "hi-IN");
         intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
         return intent;
+    }
+
+    public static String getTollFreeNumber(){
+        return "9986155685";
+    }
+
+    public static String getSMSSendToNumber() {
+        return "9986155685";
+    }
+
+    public static String getSMSFromNumber() {
+        return "9986123071";
+    }
+
+    public static String getSMSText() {
+        return analyze();
+    }
+
+    public static String getVoiceCallDetail() {
+        return "skype:Skype?call&video=true";
     }
 
     enum Part {HEAD,HEART,HAND,ARM,KNEE,ANKLE}
