@@ -125,11 +125,31 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initDisplay();
+        initTTS();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         initDisplay();
+    }
+
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        switch (requestCode) {
+            case Util.ANALYSIS_SPEECH_TO_TEXT_RES: {
+                if (resultCode == RESULT_OK && null != data) {
+                    ArrayList<String> result = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+                    Log.d("onActivityResult",result.get(0));
+                }
+                break;
+            }
+        }
+    }
+
+    private void initTTS() {
+        Util.setCtx(getApplicationContext());
+        Util.speak(Util.getText_greeting());
     }
 }

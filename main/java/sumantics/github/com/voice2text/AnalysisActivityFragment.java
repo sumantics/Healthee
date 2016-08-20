@@ -1,5 +1,6 @@
 package sumantics.github.com.voice2text;
 
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -7,9 +8,12 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Build;
+import android.speech.RecognizerIntent;
+import android.speech.tts.TextToSpeech;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.telephony.SmsManager;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,11 +22,14 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 /**
  * A placeholder fragment containing a simple view.
  */
 public class AnalysisActivityFragment extends Fragment {
-
+    Button nameButton;
+    Button callButton;
     public boolean isOnline(){
         ConnectivityManager cm = (ConnectivityManager)getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNw = cm.getActiveNetworkInfo();
@@ -35,15 +42,40 @@ public class AnalysisActivityFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View retView = inflater.inflate(R.layout.fragment_analysis, container, false);
+
         addAnalysisTextBox(retView);
-        if(isOnline()){
-            addVideoCallButton(retView);
-            restCall();
-        }else {
-            addVoiceCallButton(retView);
-            //sendSMS();
-        }
+        Util.speak(Util.getText_pressButton()+Util.getText_getName());
+        //getName();
+        nameButton = addButtonNameInput(retView);
+        callButton = addCallButton(retView);
         return retView;
+    }
+
+    private void getName() {
+        startActivityForResult(Util.getVoiceIntent(Util.getText_getName()), Util.ANALYSIS_SPEECH_TO_TEXT_RES);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent res_data) {
+        super.onActivityResult(requestCode, resultCode, res_data);
+        switch (requestCode) {
+            case Util.ANALYSIS_SPEECH_TO_TEXT_RES: {
+                if (null != res_data) {
+                    ArrayList<String> res = res_data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+                    Util.setName(res.get(0));
+                    if(isOnline()){
+                        restCall();
+                    }else {
+                        //sendSMS();
+                    }
+                    Util.speak(Util.getText_TalkToExpert());
+                    for (String s : res) {
+                        Log.d("onActivityResult", s + " " + resultCode);
+                    }
+                }
+                break;
+            }
+        }
     }
 
     private void restCall() {
@@ -63,9 +95,9 @@ public class AnalysisActivityFragment extends Fragment {
     }
 
     private void addAnalysisTextBox(View retView) {
-        String text = Util.analyze();
         TextView textView = new TextView(getContext());
-        textView.setText(text);
+        textView.setText(Util.analyze());
+        Util.speak(Util.analyze());
         textView.setBackgroundColor(Color.parseColor("#798dd8"));
         textView.setLayoutParams(new ViewGroup.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,
@@ -77,9 +109,6 @@ public class AnalysisActivityFragment extends Fragment {
             textView.setElevation(1.0f);
         }
         textView.setPadding(20,20,20,20);
-        //ArrayList<View> viewList =  new ArrayList<>();
-        //viewList.add(textView);
-        //retView.addTouchables(viewList);
         ((LinearLayout)retView).addView(textView);
     }
     private void constructButton(Button btn){
@@ -87,39 +116,62 @@ public class AnalysisActivityFragment extends Fragment {
             btn.setForegroundGravity(Gravity.END);
         }
         //imgButton.setImageResource(R.mipmap.call_green);
-        btn.setBackgroundColor(Color.parseColor("#a0fd6a"));
         btn.setText(Util.getText_Call());
+        btn.setBackgroundColor(Color.GRAY);
+        btn.setClickable(false);
     }
-    private void addVideoCallButton(View retView) {
+    private Button addButtonNameInput(View retView) {
+        //ImageButton imgButton = new ImageButton(retView.getContext());
+        Button imgButton = new Button(retView.getContext());
+        constructButton(imgButton);
+        activate(imgButton);
+        imgButton.setText(Util.getText_getName());
+        imgButton.setClickable(true);
+        imgButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getName();
+                deActivate(nameButton);
+                activate(callButton);
+            }
+        });
+        imgButton.setVisibility(View.VISIBLE);
+        ((LinearLayout)retView).addView(imgButton);
+        return imgButton;
+    }
+
+    private void activate(Button button) {
+        if(button!=null) {
+            button.setBackgroundColor(Color.parseColor("#a0fd6a"));
+            button.setClickable(true);
+        }
+    }
+    private void deActivate(Button button) {
+        button.setBackgroundColor(Color.GRAY);
+        button.setClickable(false);
+    }
+
+
+    private Button addCallButton(View retView) {
         //ImageButton imgButton = new ImageButton(retView.getContext());
         Button imgButton = new Button(retView.getContext());
         constructButton(imgButton);
         imgButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                videoCall();
+                if(isOnline())
+                    videoCall();
+                else
+                    callTollFree();
             }
         });
         imgButton.setVisibility(View.VISIBLE);
         ((LinearLayout)retView).addView(imgButton);
-    }
-    private void addVoiceCallButton(View retView) {
-        //ImageButton imgButton = new ImageButton(retView.getContext());
-        Button imgButton = new Button(retView.getContext());
-        constructButton(imgButton);
-        imgButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                callTollFree();
-            }
-        });
-        imgButton.setVisibility(View.VISIBLE);
-        ((LinearLayout)retView).addView(imgButton);
+        return imgButton;
     }
 
     private void sendSMS() {
         SmsManager sms = SmsManager.getDefault();
         sms.sendTextMessage(Util.getText_SMSSendToNumber(), Util.getText_SMSFromNumber(), Util.getText_SMSText(), null, null);
     }
-
 }

@@ -30,6 +30,8 @@
             android:configChanges="orientation|screenSize"
             android:label="@string/app_name"
             android:parentActivityName=".IllnessRecogActivity"></activity>
+        <service android:name=".TextToSpeechService"
+            android:stopWithTask="true"></service>
     </application>
 
 </manifest>

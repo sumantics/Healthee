@@ -18,10 +18,6 @@ import java.util.List;
 class IllnessRecogAdapter extends ArrayAdapter<Illness>{
     private View mButton;
     private View mParent;
-    TextToSpeech tts_illnessRecogAdapter = new TextToSpeech(getContext(), new TextToSpeech.OnInitListener() { //shd be initialized for each context
-        @Override
-        public void onInit(int status) {  }
-    });
 
     public IllnessRecogAdapter(Context context, List<Illness> objects) {
         super(context, 0, objects);
@@ -82,11 +78,5 @@ class IllnessRecogAdapter extends ArrayAdapter<Illness>{
             Animation animFadeIn = AnimationUtils.loadAnimation(getContext().getApplicationContext(), R.anim.fade_in);
             mButton.setVisibility(View.GONE);
         }
-    }
-
-
-    void speak(String s) {
-        tts_illnessRecogAdapter.setLanguage(Util.getLang());
-        tts_illnessRecogAdapter.speak(s, TextToSpeech.QUEUE_ADD, null);
     }
 }

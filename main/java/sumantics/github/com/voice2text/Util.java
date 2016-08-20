@@ -1,5 +1,6 @@
 package sumantics.github.com.voice2text;
 
+import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.speech.RecognizerIntent;
@@ -14,6 +15,17 @@ import java.util.Locale;
 import java.util.Set;
 
 public class Util{
+    static final int ANALYSIS_SPEECH_TO_TEXT_RES = 301;
+    static final int ANALYSIS_TTS_CHECK_CODE = 302;
+    static final String SPEAKTEXT = "SPEAKTEXT";
+    static String name;
+
+    public static void setCtx(Context ctx) {
+        Util.ctx = ctx;
+    }
+
+    static Context ctx;
+
     private static final HashSet<IllnessNames> selectedIllnesses = new HashSet<>();
     static void addIllness(IllnessNames illness){
         selectedIllnesses.add(illness);
@@ -25,8 +37,11 @@ public class Util{
     static boolean isSelected(IllnessNames illness) {return selectedIllnesses.contains(illness);}
     static int getSelectedIllnessCount() {return selectedIllnesses.size();}
     static Intent getVoiceIntent(){
+       return getVoiceIntent("बोले");
+    }
+    static Intent getVoiceIntent(String prompt){
         Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
-        intent.putExtra(RecognizerIntent.EXTRA_PROMPT, "बोले");
+        intent.putExtra(RecognizerIntent.EXTRA_PROMPT, prompt);
         //intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE,  "kn-IN");
         intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE,  "hi-IN");
         intent.putExtra(RecognizerIntent.EXTRA_ONLY_RETURN_LANGUAGE_PREFERENCE, "hi-IN");
@@ -46,9 +61,7 @@ public class Util{
         return "9986123071";
     }
 
-    public static String getText_SMSText() {
-        return selectedIllnesses.toString();
-    }
+    public static String getText_SMSText() { return name+""+selectedIllnesses.toString(); }
 
     public static String getVoiceCallDetail() {
         return "skype:Skype?call&video=true";
@@ -58,7 +71,23 @@ public class Util{
         return ">>";
     }
 
-    public static String getText_Call() { return "बात करें"; }
+    public static String getText_Call() { return "विशेषज्ञ से बात करें"; }
+
+    public static String getText_TalkToExpert() { return "अगर आप हमारे विशेषज्ञ से बात करना चाहते हैं, तो हरा बटन दबाएं";}
+
+    public static String getText_getName() { return "अपना नाम बताएं"; }
+
+    public static void setName(String s) {
+        name = s;
+    }
+
+    public static String getText_greeting() {
+        return "नमस्कार";
+    }
+
+    public static String getText_pressButton() {
+        return "हरा बटन दबाकर ";
+    }
 
     enum Part {HEAD,HEART,HAND,ARM,KNEE,ANKLE}
     enum IllnessNames {headache,toothache,cough,brokenArm, brokenWrist, kneePain,brokenAnkle,heartTrouble}
@@ -99,6 +128,12 @@ public class Util{
             retStr+= "Take care!";
         }
         return retStr;
+    }
+
+    static void speak(String s) {
+        Intent speechIntent = new Intent(ctx, TextToSpeechService.class);
+        speechIntent.putExtra(Util.SPEAKTEXT, s);
+        ctx.startService(speechIntent);
     }
 }
 
