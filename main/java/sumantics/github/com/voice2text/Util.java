@@ -34,25 +34,31 @@ public class Util{
         return intent;
     }
 
-    public static String getTollFreeNumber(){
+    public static String getText_TollFreeNumber(){
         return "9986155685";
     }
 
-    public static String getSMSSendToNumber() {
+    public static String getText_SMSSendToNumber() {
         return "9986155685";
     }
 
-    public static String getSMSFromNumber() {
+    public static String getText_SMSFromNumber() {
         return "9986123071";
     }
 
-    public static String getSMSText() {
-        return analyze();
+    public static String getText_SMSText() {
+        return selectedIllnesses.toString();
     }
 
     public static String getVoiceCallDetail() {
         return "skype:Skype?call&video=true";
     }
+
+    public static String getText_Next() {
+        return ">>";
+    }
+
+    public static String getText_Call() { return "बात करें"; }
 
     enum Part {HEAD,HEART,HAND,ARM,KNEE,ANKLE}
     enum IllnessNames {headache,toothache,cough,brokenArm, brokenWrist, kneePain,brokenAnkle,heartTrouble}
@@ -65,7 +71,7 @@ public class Util{
         if(part.equals(part.HEAD))
             return Arrays.asList(new Illness(IllnessNames.headache,"सरदर्द","क्या आपको सरदर्द है? ","head_headache"),new Illness(IllnessNames.toothache,"दांत","क्या आपके दांतों में दर्द  है?","head_toothache"),new Illness(IllnessNames.cough,"खांसी","क्या आपको खांसी है?","head_cough"));
         else if(part.equals(part.HEART))
-            return Arrays.asList(new Illness(IllnessNames.heartTrouble,"heart heart heart heart heart heart ","heart heart heart heart heart ","red_cross"));
+            return Arrays.asList(new Illness(IllnessNames.heartTrouble,"दिल ","क्या आपको छाती में दर्द है?","heart"));
         else if(part.equals(part.ARM))
             return Arrays.asList(new Illness(IllnessNames.brokenArm,"बांह","बांहों में दर्द है?","arm_broken"));
         else if(part.equals(part.HAND))
@@ -79,15 +85,20 @@ public class Util{
     }
 
     static String analyze(){
+        String retStr = "";
+        if(selectedIllnesses.contains(IllnessNames.heartTrouble)){
+            retStr+=" निकटतम चिकित्सालय जाएँ और एक एंजियोग्राम करा लें । हम कुछ ही  समय में  आपको  एक चिकित्सा विशेषज्ञ से जोड़ेंगे\n";
+        }
         if(selectedIllnesses.contains(IllnessNames.headache)&&selectedIllnesses.contains(IllnessNames.toothache)){
             //return "Take an asprin now and meet the dentist tomorrow!";
-            return "अब एक Asprin ले लो और कल दंत चिकित्सक से मिल ले!";
+            retStr+= "अब एक Asprin ले लो और कल दंत चिकित्सक से मिल ले!";
         }else if(selectedIllnesses.contains(IllnessNames.headache)){
-            return "अब एक Asprin ले लो!";
+            retStr+= "अब एक Asprin ले लो!";
         }
         else{
-            return "Take care!";
+            retStr+= "Take care!";
         }
+        return retStr;
     }
 }
 

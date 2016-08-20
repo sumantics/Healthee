@@ -3,26 +3,20 @@ package sumantics.github.com.voice2text;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.Typeface;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Build;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.telephony.SmsManager;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
-import android.widget.ListView;
-import android.widget.RelativeLayout;
+import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
-
-import java.util.ArrayList;
 
 /**
  * A placeholder fragment containing a simple view.
@@ -47,7 +41,7 @@ public class AnalysisActivityFragment extends Fragment {
             restCall();
         }else {
             addVoiceCallButton(retView);
-            sendSMS();
+            //sendSMS();
         }
         return retView;
     }
@@ -64,7 +58,7 @@ public class AnalysisActivityFragment extends Fragment {
     private void callTollFree() {
         Intent callIntent = new Intent(Intent.ACTION_DIAL);
         callIntent.setFlags(Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT | Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_NO_USER_ACTION);
-        callIntent.setData(Uri.parse("tel:"+Util.getTollFreeNumber()));
+        callIntent.setData(Uri.parse("tel:"+Util.getText_TollFreeNumber()));
         startActivity(callIntent);
     }
 
@@ -77,6 +71,7 @@ public class AnalysisActivityFragment extends Fragment {
                 ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT));
         textView.setMinLines(5);
+        textView.setLineSpacing(5.0f,2.0f);
         textView.setGravity(Gravity.CENTER_VERTICAL);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             textView.setElevation(1.0f);
@@ -85,12 +80,20 @@ public class AnalysisActivityFragment extends Fragment {
         //ArrayList<View> viewList =  new ArrayList<>();
         //viewList.add(textView);
         //retView.addTouchables(viewList);
-        ((RelativeLayout)retView).addView(textView);
+        ((LinearLayout)retView).addView(textView);
     }
-
+    private void constructButton(Button btn){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            btn.setForegroundGravity(Gravity.END);
+        }
+        //imgButton.setImageResource(R.mipmap.call_green);
+        btn.setBackgroundColor(Color.parseColor("#a0fd6a"));
+        btn.setText(Util.getText_Call());
+    }
     private void addVideoCallButton(View retView) {
-        ImageButton imgButton = new ImageButton(retView.getContext());
-        imgButton.setImageResource(R.mipmap.ic_launcher);
+        //ImageButton imgButton = new ImageButton(retView.getContext());
+        Button imgButton = new Button(retView.getContext());
+        constructButton(imgButton);
         imgButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -98,11 +101,12 @@ public class AnalysisActivityFragment extends Fragment {
             }
         });
         imgButton.setVisibility(View.VISIBLE);
-        ((RelativeLayout)retView).addView(imgButton);
+        ((LinearLayout)retView).addView(imgButton);
     }
     private void addVoiceCallButton(View retView) {
-        ImageButton imgButton = new ImageButton(retView.getContext());
-        imgButton.setImageResource(R.mipmap.ic_launcher);
+        //ImageButton imgButton = new ImageButton(retView.getContext());
+        Button imgButton = new Button(retView.getContext());
+        constructButton(imgButton);
         imgButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -110,12 +114,12 @@ public class AnalysisActivityFragment extends Fragment {
             }
         });
         imgButton.setVisibility(View.VISIBLE);
-        ((RelativeLayout)retView).addView(imgButton);
+        ((LinearLayout)retView).addView(imgButton);
     }
 
     private void sendSMS() {
         SmsManager sms = SmsManager.getDefault();
-        sms.sendTextMessage(Util.getSMSSendToNumber(), Util.getSMSFromNumber(), Util.getSMSText(), null, null);
+        sms.sendTextMessage(Util.getText_SMSSendToNumber(), Util.getText_SMSFromNumber(), Util.getText_SMSText(), null, null);
     }
 
 }

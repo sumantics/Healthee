@@ -1,11 +1,7 @@
 package sumantics.github.com.voice2text;
 
-import android.content.ActivityNotFoundException;
 import android.content.Context;
-import android.content.Intent;
-import android.speech.RecognizerIntent;
 import android.speech.tts.TextToSpeech;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,10 +12,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 class IllnessRecogAdapter extends ArrayAdapter<Illness>{
@@ -83,7 +76,7 @@ class IllnessRecogAdapter extends ArrayAdapter<Illness>{
         if(mButton==null)
             mButton = (Button)mParent.getRootView().findViewById(R.id.analysis_enable);//this is in the activity
         if(Util.getSelectedIllnessCount()>0){
-            ((Button)mButton).setText("selected");
+            ((Button)mButton).setText(Util.getText_Next());
             mButton.setVisibility(View.VISIBLE);
         }else{
             Animation animFadeIn = AnimationUtils.loadAnimation(getContext().getApplicationContext(), R.anim.fade_in);

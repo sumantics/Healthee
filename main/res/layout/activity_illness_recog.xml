@@ -3,11 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent" android:layout_height="match_parent"
     android:id="@+id/illness_recog_container"
-    tools:context="sumantics.github.com.voice2text.IllnessRecogActivity"
-    >
+    tools:context="sumantics.github.com.voice2text.IllnessRecogActivity">
     <Button
         android:id="@+id/analysis_enable"
         android:layout_gravity="bottom"
+        android:background="#a0fd6a"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
@@ -15,5 +15,6 @@
         android:layout_height="wrap_content"
         android:visibility="gone"
         android:onClick="gotoAnalysisActivity"
+        android:textAppearance="?android:attr/textAppearanceLarge"
         />
 </FrameLayout>
