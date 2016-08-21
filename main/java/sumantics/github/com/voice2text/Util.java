@@ -75,7 +75,7 @@ public class Util{
 
     public static String getText_TalkToExpert() { return "अगर आप हमारे विशेषज्ञ से बात करना चाहते हैं, तो हरा बटन दबाएं";}
 
-    public static String getText_getName() { return "अपना नाम बताएं"; }
+    public static String getText_getName() { return "अपना नाम और गांव का नाम बताएं"; }
 
     public static void setName(String s) {
         name = s;
@@ -120,7 +120,7 @@ public class Util{
         }
         if(selectedIllnesses.contains(IllnessNames.headache)&&selectedIllnesses.contains(IllnessNames.toothache)){
             //return "Take an asprin now and meet the dentist tomorrow!";
-            retStr+= "अब एक Asprin ले लो और कल दंत चिकित्सक से मिल ले!";
+            retStr+= "अब एक Asprin ले लें और कल दंत चिकित्सक से मिल ले!";
         }else if(selectedIllnesses.contains(IllnessNames.headache)){
             retStr+= "अब एक Asprin ले लो!";
         }
