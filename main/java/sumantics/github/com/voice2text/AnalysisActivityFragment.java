@@ -44,6 +44,7 @@ public class AnalysisActivityFragment extends Fragment {
         View retView = inflater.inflate(R.layout.fragment_analysis, container, false);
 
         addAnalysisTextBox(retView);
+        Util.speak(Util.analyze());
         Util.speak(Util.getText_pressButton()+Util.getText_getName());
         //getName();
         nameButton = addButtonNameInput(retView);
@@ -97,7 +98,6 @@ public class AnalysisActivityFragment extends Fragment {
     private void addAnalysisTextBox(View retView) {
         TextView textView = new TextView(getContext());
         textView.setText(Util.analyze());
-        Util.speak(Util.analyze());
         textView.setBackgroundColor(Color.parseColor("#798dd8"));
         textView.setLayoutParams(new ViewGroup.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,
@@ -109,25 +109,32 @@ public class AnalysisActivityFragment extends Fragment {
             textView.setElevation(1.0f);
         }
         textView.setPadding(20,20,20,20);
+        setMargins(textView);
         ((LinearLayout)retView).addView(textView);
     }
     private void constructButton(Button btn){
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             btn.setForegroundGravity(Gravity.END);
         }
-        //imgButton.setImageResource(R.mipmap.call_green);
         btn.setText(Util.getText_Call());
-        btn.setBackgroundColor(Color.GRAY);
-        btn.setClickable(false);
+        setMargins(btn);
+        deActivate(btn);
     }
+
+    private void setMargins(View view) {
+        LinearLayout.LayoutParams lytParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        lytParams.setMargins(15,15,15,15);
+        view.setLayoutParams(lytParams);
+    }
+
     private Button addButtonNameInput(View retView) {
         //ImageButton imgButton = new ImageButton(retView.getContext());
-        Button imgButton = new Button(retView.getContext());
-        constructButton(imgButton);
-        activate(imgButton);
-        imgButton.setText(Util.getText_getName());
-        imgButton.setClickable(true);
-        imgButton.setOnClickListener(new View.OnClickListener() {
+        Button button = new Button(retView.getContext());
+        constructButton(button);
+        activate(button);
+        button.setText(Util.getText_getName());
+        button.setClickable(true);
+        button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 getName();
@@ -135,20 +142,22 @@ public class AnalysisActivityFragment extends Fragment {
                 activate(callButton);
             }
         });
-        imgButton.setVisibility(View.VISIBLE);
-        ((LinearLayout)retView).addView(imgButton);
-        return imgButton;
+        button.setVisibility(View.VISIBLE);
+        ((LinearLayout)retView).addView(button);
+        return button;
     }
 
     private void activate(Button button) {
         if(button!=null) {
-            button.setBackgroundColor(Color.parseColor("#a0fd6a"));
+            button.setBackgroundColor(getResources().getColor(R.color.colorPrimaryDark));
+            button.setTextSize(20);
             button.setClickable(true);
         }
     }
     private void deActivate(Button button) {
         button.setBackgroundColor(Color.GRAY);
-        button.setClickable(false);
+        button.setTextSize(8);
+        //button.setClickable(false); //let user edit later??
     }
 
 
@@ -156,6 +165,7 @@ public class AnalysisActivityFragment extends Fragment {
         //ImageButton imgButton = new ImageButton(retView.getContext());
         Button imgButton = new Button(retView.getContext());
         constructButton(imgButton);
+        deActivate(imgButton);
         imgButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

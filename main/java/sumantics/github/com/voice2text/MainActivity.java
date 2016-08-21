@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
 
     void initDisplay(){
         head = (RadioButton)findViewById(R.id.head);
-        head.setChecked(false);
+        //head.setChecked(false);
         head.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         heart = (RadioButton)findViewById(R.id.heart);
-        heart.setChecked(false);
+        //heart.setChecked(false);
         heart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         arm = (RadioButton)findViewById(R.id.leftForearm);
-        arm.setChecked(false);
+        //arm.setChecked(false);
         arm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -72,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         hand = (RadioButton)findViewById(R.id.rightHand);
-        hand.setChecked(false);
+        //hand.setChecked(false);
         hand.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -88,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         knee = (RadioButton)findViewById(R.id.knee);
-        knee.setChecked(false);
+        //knee.setChecked(false);
         knee.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -104,7 +104,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         ankle = (RadioButton)findViewById(R.id.ankle);
-        ankle.setChecked(false);
+        //ankle.setChecked(false);
         ankle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -150,6 +150,6 @@ public class MainActivity extends AppCompatActivity {
 
     private void initTTS() {
         Util.setCtx(getApplicationContext());
-        Util.speak(Util.getText_greeting());
+        Util.speak(Util.getText_greeting()+Util.getText_select());
     }
 }

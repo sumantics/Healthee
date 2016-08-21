@@ -6,11 +6,14 @@ import android.os.Handler;
 import android.os.IBinder;
 import android.speech.tts.TextToSpeech;
 import android.support.annotation.Nullable;
+import android.util.Log;
 
 public class TextToSpeechService extends Service implements TextToSpeech.OnInitListener{
     private TextToSpeech tts;
     private boolean ready;
     private Handler handler;
+    private String text="";
+    private static boolean isWelcomeMsg = true;
 
     @Override
     public void onCreate() {
@@ -22,15 +25,23 @@ public class TextToSpeechService extends Service implements TextToSpeech.OnInitL
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        handler.removeCallbacksAndMessages(null);
-        speak(intent.getStringExtra(Util.SPEAKTEXT));
-
+        //handler.removeCallbacksAndMessages(null);
+        //speak(intent.getStringExtra(Util.SPEAKTEXT));
+        if(!text.contains(intent.getStringExtra(Util.SPEAKTEXT)))
+            text += intent.getStringExtra(Util.SPEAKTEXT);
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+                speak();
+            }
+        });
+        Log.d("sumanth","onStartCommand");
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
                 stopSelf();
             }
-        }, 15*1000);
+        }, 300*1000);
 
         return START_STICKY;
     }
@@ -41,6 +52,7 @@ public class TextToSpeechService extends Service implements TextToSpeech.OnInitL
             tts.stop();
             tts.shutdown();
         }
+        Log.d("onDestroy","tts destoryed");
         super.onDestroy();
     }
 
@@ -54,13 +66,28 @@ public class TextToSpeechService extends Service implements TextToSpeech.OnInitL
     public void onInit(int status) {
         if (status == TextToSpeech.SUCCESS) {
             int result = tts.setLanguage(Util.getLang());
+            handler.postDelayed(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        speak();
+                                    }
+                                },3*1000
+            );
+            isWelcomeMsg=false;
         }
+    }
+
+    private void speak() {
+        speak(text);
+        if(!isWelcomeMsg)
+            text = "";
     }
 
     private void speak(String s) {
         ready = false;
         if (tts != null) {
-            //tts.speak("s", TextToSpeech.QUEUE_FLUSH, null);
+            if(isWelcomeMsg)
+                tts.speak(s, TextToSpeech.QUEUE_FLUSH, null);
             tts.speak(s, TextToSpeech.QUEUE_ADD, null);
         }
         ready = true;

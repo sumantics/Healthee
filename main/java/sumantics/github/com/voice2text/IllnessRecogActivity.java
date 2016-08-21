@@ -29,6 +29,7 @@ public class IllnessRecogActivity  extends ActionBarActivity {
 
     @Override
     public View onCreateView(String name, Context context, AttributeSet attrs) {
+        Util.speak(Util.getVoiceText_select_pressButton());
         return super.onCreateView(name, context, attrs);
     }
 

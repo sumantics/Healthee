@@ -18,6 +18,7 @@ public class Util{
     static final int ANALYSIS_SPEECH_TO_TEXT_RES = 301;
     static final int ANALYSIS_TTS_CHECK_CODE = 302;
     static final String SPEAKTEXT = "SPEAKTEXT";
+    static int max_stage=0;
     static String name;
 
     public static void setCtx(Context ctx) {
@@ -68,12 +69,12 @@ public class Util{
     }
 
     public static String getText_Next() {
-        return ">>";
+        return getText_select_pressButton();
     }
 
     public static String getText_Call() { return "विशेषज्ञ से बात करें"; }
 
-    public static String getText_TalkToExpert() { return "अगर आप हमारे विशेषज्ञ से बात करना चाहते हैं, तो हरा बटन दबाएं";}
+    public static String getText_TalkToExpert() { return "अगर आप हमारे विशेषज्ञ से बात करना चाहते हैं, तो बैंगनी बटन दबाएं";}
 
     public static String getText_getName() { return "अपना नाम और गांव का नाम बताएं"; }
 
@@ -81,13 +82,12 @@ public class Util{
         name = s;
     }
 
-    public static String getText_greeting() {
-        return "नमस्कार";
-    }
+    public static String getText_greeting() { return "नमस्कार!"; }
 
-    public static String getText_pressButton() {
-        return "हरा बटन दबाकर ";
-    }
+    public static String getText_pressButton() { return "बैंगनी  बटन दबाकर ";} //हरा
+    public static String getText_select() { if(max_stage==0) {return "आपको कहाँ परेशानी है? उपयुक्त विकल्प चुनें ";}else return "";}
+    public static String getVoiceText_select_pressButton() {  if(max_stage<1){max_stage++; return "उपयुक्त विकल्प चुनें और नीचे बने  बैंगनी बटन दबाएँ।";} else return "";}
+    public static String getText_select_pressButton() { return "उपयुक्त विकल्प चुनें और यह बटन दबाएँ।"; }
 
     enum Part {HEAD,HEART,HAND,ARM,KNEE,ANKLE}
     enum IllnessNames {headache,toothache,cough,brokenArm, brokenWrist, kneePain,brokenAnkle,heartTrouble}
@@ -98,7 +98,7 @@ public class Util{
     static List<Illness> getIllnesses(Part part){
         Log.d("getIllnesses",part.name());
         if(part.equals(part.HEAD))
-            return Arrays.asList(new Illness(IllnessNames.headache,"सरदर्द","क्या आपको सरदर्द है? ","head_headache"),new Illness(IllnessNames.toothache,"दांत","क्या आपके दांतों में दर्द  है?","head_toothache"),new Illness(IllnessNames.cough,"खांसी","क्या आपको खांसी है?","head_cough"));
+            return Arrays.asList(new Illness(IllnessNames.headache,"सरदर्द","क्या आपको सरदर्द है? ","head_headache"),new Illness(IllnessNames.toothache,"दांत","क्या आपके दांतों में दर्द  है?","head_toothache"),new Illness(IllnessNames.cough,"खांसी","क्या आपको खांसी है?","head_cough"),new Illness(IllnessNames.headache,"सरदर्द","क्या आपको सरदर्द है? ","head_headache"));
         else if(part.equals(part.HEART))
             return Arrays.asList(new Illness(IllnessNames.heartTrouble,"दिल ","क्या आपको छाती में दर्द है?","heart"));
         else if(part.equals(part.ARM))
@@ -116,16 +116,16 @@ public class Util{
     static String analyze(){
         String retStr = "";
         if(selectedIllnesses.contains(IllnessNames.heartTrouble)){
-            retStr+=" निकटतम चिकित्सालय जाएँ और एक एंजियोग्राम करा लें । हम कुछ ही  समय में  आपको  एक चिकित्सा विशेषज्ञ से जोड़ेंगे\n";
+            retStr+= " निकटतम चिकित्सालय जाएँ और एक एंजियोग्राम करा लें, हम कुछ ही  समय में आपको  एक चिकित्सा विशेषज्ञ से जोड़ेंगे  !"+"\n";
         }
         if(selectedIllnesses.contains(IllnessNames.headache)&&selectedIllnesses.contains(IllnessNames.toothache)){
             //return "Take an asprin now and meet the dentist tomorrow!";
-            retStr+= "अब एक Asprin ले लें और कल दंत चिकित्सक से मिल ले!";
+            retStr+= " अब एक Asprin ले लें और कल दंत चिकित्सक से मिल ले!"+"\n";
         }else if(selectedIllnesses.contains(IllnessNames.headache)){
-            retStr+= "अब एक Asprin ले लो!";
+            retStr+= " अब एक Asprin ले लें!"+"\n";
         }
         else{
-            retStr+= "Take care!";
+            retStr+= " विशेषज्ञ से बात करें!"+"\n";
         }
         return retStr;
     }
