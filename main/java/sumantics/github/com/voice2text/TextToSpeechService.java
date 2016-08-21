@@ -66,12 +66,12 @@ public class TextToSpeechService extends Service implements TextToSpeech.OnInitL
     public void onInit(int status) {
         if (status == TextToSpeech.SUCCESS) {
             int result = tts.setLanguage(Util.getLang());
-            handler.postDelayed(new Runnable() {
+            handler.post(new Runnable() {
                                     @Override
                                     public void run() {
                                         speak();
                                     }
-                                },3*1000
+                                }
             );
             isWelcomeMsg=false;
         }

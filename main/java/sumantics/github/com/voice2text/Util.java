@@ -85,7 +85,7 @@ public class Util{
     public static String getText_greeting() { return "नमस्कार!"; }
 
     public static String getText_pressButton() { return "बैंगनी  बटन दबाकर ";} //हरा
-    public static String getText_select() { if(max_stage==0) {return "आपको कहाँ परेशानी है? उपयुक्त विकल्प चुनें ";}else return "";}
+    public static String getText_select() { if(max_stage==0) {return "आपको कहाँ परेशानी है? गोल बटन दबाकर उपयुक्त विकल्प चुनें ";}else return "";}
     public static String getVoiceText_select_pressButton() {  if(max_stage<1){max_stage++; return "उपयुक्त विकल्प चुनें और नीचे बने  बैंगनी बटन दबाएँ।";} else return "";}
     public static String getText_select_pressButton() { return "उपयुक्त विकल्प चुनें और यह बटन दबाएँ।"; }
 
