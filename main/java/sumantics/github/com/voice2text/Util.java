@@ -51,21 +51,21 @@ public class Util{
     }
 
     public static String getText_TollFreeNumber(){
-        return "9986155685";
+        return "1234567890";
     }
 
     public static String getText_SMSSendToNumber() {
-        return "9986155685";
+        return "1234567890";
     }
 
     public static String getText_SMSFromNumber() {
-        return "9986123071";
+        return "1234567890";
     }
 
     public static String getText_SMSText() { return name+""+selectedIllnesses.toString(); }
 
     public static String getVoiceCallDetail() {
-        return "skype:Skype?call&video=true";
+        return "skype:Skype?call&video=true";//hardcoding the userID for testing
     }
 
     public static String getText_Next() {
