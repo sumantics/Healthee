@@ -1,0 +1,6 @@
+{
+  "name": "Healthee",
+  "tagline": "Connect rural patients to specialists!",
+  "body": "#Healtee\r\n\r\nAn app to help rural users to list the symptoms seen, generate preliminary advice. The data would be sent to servers for processing and analysis.\r\nThe users could then connect to specialists (Voice/Video calls). After the server processes the data from patients, the specialists could also connect to the patients directly. \r\nA call could be scheduled at a later time if a local nurse is needed for examination by the remote doctor.\r\n\r\nThe rural user led to picture-rich interface, supported with speech and text. Users could input data with voice in their local dialect(Hindi for now).\r\nAll this is designed to work in offline mode.\r\n\r\nHowever, if there is access to internet, the users could connect via Skype.\r\n\r\n![Select_organ](https://github.com/sumantics/Healthee/blob/master/page_1b.png)\r\n![Select_problems](https://github.com/sumantics/Healthee/blob/master/page_2.png)\r\n![PreliminaryAdvice_inputName](https://github.com/sumantics/Healthee/blob/master/page_3.png)\r\n![Contact_CallCentreOrSpecialist](https://github.com/sumantics/Healthee/blob/master/page_4.png)\r\n![SkypeCall](https://github.com/sumantics/Healthee/blob/master/page_5.png)\r\n\r\n",
+  "note": "Don't delete this file! It's used internally to help with page regeneration."
+}
