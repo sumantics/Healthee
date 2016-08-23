@@ -11,7 +11,7 @@ All this is designed to work in offline mode. However, if there is access to int
 ####Certain experiments have been made wrt UX 
 1. Image driven design, to create a natural interface without any pre-requisites.
 2. Text-to-speech and text in local language as secondary interface
-3. Keeping in mind most users wouldn't be tech savvy, the elemnets are designmed bigger than normal
+3. Keeping in mind most users wouldn't be tech savvy, the elements are designmed bigger than normal
 4. The (selection) buttons have been made large and moved to left to avoid accidental intraction during scroll.
 5. Reducing the font and greying of in-active buttons dissuades users from using them. However, clickability has been retained, if the user intends to edit the data.
 
@@ -26,10 +26,10 @@ All this is designed to work in offline mode. However, if there is access to int
 8. The server will process and classify the nature of the problem and route it to the right specialists. !! This is manual for now !!
 9. Specialists could then contact the patient for diagnosis. It could also be scheduled for a later date (at the nearest medical facility, where a nurse could help the doctor examine remotely). !! This is manual for now !!
 
-
-![Select_organ](https://github.com/sumantics/Healthee/blob/master/page_1b.png)
-![Select_problems](https://github.com/sumantics/Healthee/blob/master/page_2.png)
-![PreliminaryAdvice_inputName](https://github.com/sumantics/Healthee/blob/master/page_3.png)
-![Contact_CallCentreOrSpecialist](https://github.com/sumantics/Healthee/blob/master/page_4.png)
-![SkypeCall](https://github.com/sumantics/Healthee/blob/master/page_5.png)
-
+<p align="center">
+<img src="https://github.com/sumantics/Healthee/blob/master/page_1b.png" title="Select_organ" width="256">
+<img src="https://github.com/sumantics/Healthee/blob/master/page_2.png" title="Select_problems" width="256">
+<img src="https://github.com/sumantics/Healthee/blob/master/page_3.png" title="PreliminaryAdvice_inputName" width="256">
+<img src="https://github.com/sumantics/Healthee/blob/master/page_4.png" title="Contact_CallCentreOrSpecialist" width="256">
+<img src="https://github.com/sumantics/Healthee/blob/master/page_5.png" title="SkypeCall" width="256">
+</p>
