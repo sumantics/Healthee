@@ -10,10 +10,10 @@ All this is designed to work in offline mode. However, if there is access to int
 
 ####Certain experiments have been made wrt UX 
 1. Image driven design, to create a natural interface without any pre-requisites.
-2. Text-to-speech and text as secondary interface
+2. Text-to-speech and text in local language as secondary interface
 3. Keeping in mind most users wouldn't be tech savvy, the elemnets are designmed bigger than normal
 4. The (selection) buttons have been made large and moved to left to avoid accidental intraction during scroll.
-5. Reducing the font and greying of in-active buttons dissuades users from using them. However, clickability has not been retained, if the user intends to edit the data.
+5. Reducing the font and greying of in-active buttons dissuades users from using them. However, clickability has been retained, if the user intends to edit the data.
 
 ####Sequence:
 1. User clicks to indicate he has trouble in specific part of the body. (Supported by Voice/Image)
